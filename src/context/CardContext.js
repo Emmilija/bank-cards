@@ -6,13 +6,21 @@ export const CardContext = createContext()
 export const  CardProvider = ({children}) => {
 const [cardData, setCardData] = useState([
     {
-    id: '1',
+    id: '2',
     name: "Emilija Karatashevska",
-    number: '5456 4545 4564 4564',
-    expiry: '162',
+    number: '4456 4545 4564 4564',
+    expiry: '16/22',
     cvc: '123',
-    cardName: "mastercard",
-    }
+    cardName: "visa",
+    },
+    {
+        id: '1',
+        name: "Emilija Karatashevska",
+        number: '4456 4545 4564 4564',
+        expiry: '16/22',
+        cvc: '123',
+        cardName: "mastercard",
+        }
 ])
 
 const [showForm, setShowForm] = useState(false);
@@ -20,6 +28,7 @@ const [showForm, setShowForm] = useState(false);
 const [cardEdit, setCardEdit] = useState({
     item: {},
     edit: false,
+    
 })
 
 

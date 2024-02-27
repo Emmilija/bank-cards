@@ -10,7 +10,7 @@ import EditButton from "./EditButton"
 export default function CardList({ children, item
  }) {
 
-const {deleteCard, selectedCardForEdit} = useContext(CardContext)
+const { selectedCardForEdit} = useContext(CardContext)
 
 
 
@@ -24,7 +24,7 @@ const isVisa = item.cardName === 'visa';
         <div  className={`card-container ${isVisa && "two"}`} >
           <div className="card w-full h-full">
             <div className="logo-container flex justify-between items-center">
-              <div>
+              <div className="logo mr-2">
                 <img
                   src={isVisa ? cardLogoVisa : cardLogoMaster}
                   alt="Card Logo"
@@ -42,17 +42,16 @@ const isVisa = item.cardName === 'visa';
               </div>
             </div>
             <div className="name-container">
-              <div className="flex-col justify-between">
+              <div className="name flex-col justify-between">
                 <p className="font-bold">{item.name}</p>
-                <p className="color">{item.number}</p>
+                <p className={`font-bold ${isVisa ? "color-gray-dark" : "color-white"}`}>{item.number}</p>
               </div>
-           
+
+           <div className="">
              <EditButton selectedCardForEdit={selectedCardForEdit} item={item}  />
+             </div>
 
-
-              <button onClick={deleteCard}>
-                
-              </button>
+          
     
             </div>
           </div>

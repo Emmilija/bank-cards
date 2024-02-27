@@ -13,7 +13,7 @@ const  EditButton = ({ selectedCardForEdit, item }) => {
         openForm(); // Optionally open the form when edit button is clicked
     };
     return (
-        <button onClick={handleEditClick} className="flex justify-end">
+        <button onClick={handleEditClick} >
                 <img src={editIcon}  alt="Edit Icon" className="w-8 h-8" />
               </button>
     );

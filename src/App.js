@@ -1,11 +1,13 @@
 
 import "./styles/global.css"
 import CardContainer from "./components/CardContainer";
-import { CardProvider } from "./context/CardContext";
+import {  CardProvider } from "./context/CardContext";
 
 
 
 function App() {
+
+
 
   return (
     <CardProvider >
@@ -18,9 +20,11 @@ function App() {
             Add, edit or delete your cards any time
           </p>
         </header>
-        <div className=" ">
+       
+        <div>
             <CardContainer  />
         </div>
+      
       </div>
     </div>
     </CardProvider>

@@ -7,8 +7,6 @@ import CardForm from "./CardForm"
 
 export default function CardContainer() {
     const {cardData, showForm, openForm} = useContext(CardContext)
-   
-    
 
       
 
@@ -18,27 +16,27 @@ export default function CardContainer() {
     console.log(cardData)
 
     return (
-      <>
-      <div className="" >
+    <div className={` ${showForm ? 'absolute inset-0 w-full h-full' : ''}`}>
+      <div className="flex flex-col justify-between items-center h-auto container" >
 
 
-          <div className="w-full">
+          <div className="">
               {cardData.map((item) => (
                   <CardList key={item.id}  item={item} />
               ))}
           </div>
 
-          <div className="absolute inset-0 bg-black bg-opacity-75 w-full h-full ">
-    {showForm && (
-             
-                <CardForm cardData={cardData}/>
          
+    {showForm && (
+              <div className="open-form absolute inset-0 w-full h-full ">
+                <CardForm cardData={cardData}/>
+                </div>
             )}
 
-</div>
+
 
 {!showForm && (
-        <div className="center-btn">
+        <div className="center-btn m-4">
           <button className="btn" onClick={() => openForm()}>
             Add new card
           </button>
@@ -46,7 +44,7 @@ export default function CardContainer() {
       )}
           
       </div>
-      </>
+      </div>
   );
   
 }
