@@ -2,10 +2,13 @@ import { useState, useContext, useEffect } from "react"
 import "../styles/index.css"
 import Button from "./Button"
 import { CardContext } from "../context/CardContext"
+import cardLogoMaster from "../assets/images/mastercard-logo.svg"
+import cardLogoVisa from "../assets/images/visa-logo.svg"
 
 
 
-export default function CardForm() {
+
+export default function CardForm({ cardLogoEdit }) {
 
   const [name, setName] = useState('')
   const [number, setNumber] = useState('')
@@ -45,7 +48,7 @@ const handleName = (e) => {
 
   switch (true) {
     case /\d/.test(inputName):
-      nameError = "Please dont put numbers";
+      nameError = "Enter a valid name";
       btnDisabled = true;
       break;
     case inputName === "":
@@ -206,10 +209,9 @@ const handleName = (e) => {
 
 
     return(
-      
-<div className="form-box rounded-tl-lg mt-4">
-
-
+   
+  
+<div className={`form-box rounded-tl-lg mt-4 ${cardEdit.edit ? 'edit-mode' : ''}`}>
 <div>
   <button onClick={() => closeForm()} className="close-icon " >
     <svg
@@ -235,8 +237,38 @@ const handleName = (e) => {
 <div>
 
 
-<form onSubmit={handleSubmit} className="form-container bg-white flex flex-col justify-start shadow-md rounded pt-8 pb-4 sm:pb-8  " >
+<form onSubmit={handleSubmit} className="form-container bg-white flex flex-col justify-between shadow-md rounded" >
 <h1 className="font-bold mb-8">{cardEdit.edit ? 'Edit your card' : 'Add your card details'}</h1>
+
+
+
+{cardEdit.edit && (
+  <div className="card-container w-full h-auto">
+    <div className="card w-60 h-auto">
+      <div className="flex ">
+        <div className="logo-container">
+          <img src={cardLogoEdit} alt="Card Logo" />
+        </div>
+        <div className="flex ">
+          <div className="">
+          <p className="edit-text font-bold ">Expiry</p>
+          <span>
+            {expiry}
+          </span>
+          </div>
+          <>
+          <p className="edit-text font-bold text-sm">CVC:</p>
+          <span>{cvc}</span>
+          </>
+        </div>
+      </div>
+      <div className="info card flex items-start">
+        <p className=" font-bold">{name}</p>
+        <p className=" font-bold">{number}</p>
+      </div>
+    </div>
+  </div>
+)}
 
 <div className="h-32 space-y-6">
         <div className={`mb-8` }>
@@ -316,7 +348,7 @@ const handleName = (e) => {
                     </div>
 
                     {cardEdit.edit && (
-            <div className="flex justify-center">
+            <div className="delete-btn">
               <button className="delete" onClick={deleteCard} disabled>Delete card</button>
             </div>
           )}

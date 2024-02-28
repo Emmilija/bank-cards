@@ -4,7 +4,7 @@ import cardLogoVisa from "../assets/images/visa-logo.svg"
 import { CardContext } from "../context/CardContext"
 import { useContext } from "react"
 import EditButton from "./EditButton"
-
+import CardForm from "./CardForm"
 
 
 export default function CardList({ children, item
@@ -16,13 +16,20 @@ const { selectedCardForEdit} = useContext(CardContext)
 
 const isVisa = item.cardName === 'visa';
 
+<CardForm
+  nameEdit={selectedCardForEdit.name}
+  numberEdit={selectedCardForEdit.number}
+  expiryEdit={selectedCardForEdit.expiry}
+  cvcEdit={selectedCardForEdit.cvc}
+  cardLogoEdit={selectedCardForEdit.isVisa ? cardLogoVisa : cardLogoMaster}
+/>
 
 
   return (
-    <div className="h-auto">
+    <div className="h-full px-8 ">
      
         <div  className={`card-container ${isVisa && "two"}`} >
-          <div className="card w-full h-full">
+          <div className="card w-full h-full py-4">
             <div className="logo-container flex justify-between items-center">
               <div className="logo mr-2">
                 <img

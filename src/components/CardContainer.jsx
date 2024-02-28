@@ -16,22 +16,33 @@ export default function CardContainer() {
     console.log(cardData)
 
     return (
-    <div className={` ${showForm ? 'absolute inset-0 w-full h-full' : ''}`}>
+    <div className={showForm ? "open-form" : ''}>
+
+<header className="mb-8 h-16 px-8 py-8 flex flex-col justify-start items-start">
+     
+     <h1 className="text-primary  font-black text-30">Your Cards</h1>
+     <p className="text-gray-dark text-14">
+       Add, edit or delete your cards any time
+     </p>
+   </header>
+
       <div className="flex flex-col justify-between items-center h-auto container" >
 
+      {showForm && (
+              <div className="absolute inset-0 w-full h-full ">
+                <CardForm cardData={cardData}/>
+                </div>
+            )}
 
-          <div className="">
+
+{!showForm && (
+          <div className="flex flex-col justify-between ">
               {cardData.map((item) => (
                   <CardList key={item.id}  item={item} />
               ))}
           </div>
-
+)}
          
-    {showForm && (
-              <div className="open-form absolute inset-0 w-full h-full ">
-                <CardForm cardData={cardData}/>
-                </div>
-            )}
 
 
 
