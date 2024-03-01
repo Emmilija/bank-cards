@@ -16,9 +16,9 @@ export default function CardContainer() {
     console.log(cardData)
 
     return (
-    <div className={showForm ? "open-form" : ''}>
+    <div className={` ${showForm ? "open-form" : ''} `}>
 
-<header className="mb-8 h-16 px-8 py-8 flex flex-col justify-start items-start">
+<header className="mb-8 mt-8 h-16 px-8 py-8 flex flex-col justify-start items-start">
      
      <h1 className="text-primary  font-black text-30">Your Cards</h1>
      <p className="text-gray-dark text-14">

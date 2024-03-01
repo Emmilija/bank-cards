@@ -2,8 +2,7 @@ import { useState, useContext, useEffect } from "react"
 import "../styles/index.css"
 import Button from "./Button"
 import { CardContext } from "../context/CardContext"
-import cardLogoMaster from "../assets/images/mastercard-logo.svg"
-import cardLogoVisa from "../assets/images/visa-logo.svg"
+
 
 
 
@@ -140,7 +139,7 @@ const handleName = (e) => {
         const isValidExpiry = /\b(0[1-9]|1[0-2])\/?([0-9]{2})\b/.test(formattedDisplayExpiry);
         let expiryError = '';
       
-        switch (true) {
+        switch (false) {
           case isValidExpiry:
             expiryError = 'Please enter a valid expiry date';
             break;

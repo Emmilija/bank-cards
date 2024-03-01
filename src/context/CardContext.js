@@ -1,27 +1,9 @@
-import { createContext, useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { createContext, useState, useEffect } from "react";
 
 export const CardContext = createContext()
 
 export const  CardProvider = ({children}) => {
-const [cardData, setCardData] = useState([
-    {
-    id: '2',
-    name: "Emilija Karatashevska",
-    number: '4456 4545 4564 4564',
-    expiry: '16/22',
-    cvc: '123',
-    cardName: "visa",
-    },
-    {
-        id: '1',
-        name: "Emilija Karatashevska",
-        number: '4456 4545 4564 4564',
-        expiry: '16/22',
-        cvc: '123',
-        cardName: "mastercard",
-        }
-])
+const [cardData, setCardData] = useState([])
 
 const [showForm, setShowForm] = useState(false);
 
@@ -31,9 +13,19 @@ const [cardEdit, setCardEdit] = useState({
     
 })
 
+useEffect(() => {
+    fetchCard()
+}, [])
 
 
 
+//Fetch cards
+const fetchCard = async () => {
+    const response = await fetch(`/card?_sort=id`)
+    const data = await response.json()
+
+  setCardData(data)
+}
 
   //selected card for edit
   const selectedCardForEdit = (selectedCard) => {
@@ -44,10 +36,19 @@ const [cardEdit, setCardEdit] = useState({
 
 //update card
 
-const updateCard = (id, updItem) => {
+const updateCard = async (id, updItem) => {
+    const response = await fetch(`/card/${id}`,{
+        method: 'PUT',
+         headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updItem)
+        
+    } )
+    const data = await response.json()
         const updatedCards = cardData.map(card => {
             if (card.id === id) {
-                return { ...card, ...updItem }; 
+                return { ...card, ...data }; 
             }
             return card;
         });
@@ -73,10 +74,16 @@ const openForm = () => {
 
 
 //add card
-const addCard = (newCard) => {
-    newCard.id = uuidv4();
-    
-        setCardData([newCard, ...cardData])
+const addCard = async(newCard) => {
+const response = await fetch('/card', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newCard),
+})
+const data = await response.json()
+        setCardData([data, ...cardData])
     
     }
    
@@ -84,8 +91,10 @@ const addCard = (newCard) => {
 
 
 //delte card
-const deleteCard = (id) => {
+const deleteCard = async (id) => {
     if(window.confirm("are you sure you want to delete this card? ")) {
+await fetch(`/card/${id}`, {method: 'DELETE'})
+
         setCardData(cardData.filter((item) => item.id !== id))
 }
 
