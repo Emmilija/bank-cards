@@ -16,7 +16,7 @@ export default function CardContainer() {
     console.log(cardData)
 
     return (
-    <div className={` ${showForm ? "open-form" : ''} `}>
+    <div className={` ${showForm ? "open-form" : ''} h-full w-full `}>
 
 <header className="mb-8 mt-8 h-16 px-8 py-8 flex flex-col justify-start items-start">
      
@@ -26,17 +26,17 @@ export default function CardContainer() {
      </p>
    </header>
 
-      <div className="flex flex-col justify-between items-center h-auto container" >
+      <div className="flex flex-col justify-between items-center h-auto" >
 
       {showForm && (
               <div className="absolute inset-0 w-full h-full ">
-                <CardForm cardData={cardData}/>
+                <CardForm cardData={{id: '', name: '', number: '', cvc: '', expiry: ''}} />
                 </div>
             )}
 
 
 {!showForm && (
-          <div className="flex flex-col justify-between ">
+          <div className=" container-list h-auto flex flex-col w-full  ">
               {cardData.map((item) => (
                   <CardList key={item.id}  item={item} />
               ))}

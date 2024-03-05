@@ -1,36 +1,9 @@
 {
   "card": [
     {
-      "id": "1",
-      "name": "Filip",
-      "number": 5463259874521569,
-      "expiry": 162,
-      "cvc": 123,
-      "cardName": "Mastercard"
-    },
-    {
-      "name": "Magdalena Nikolovska",
-      "number": 4463259874521569,
-      "expiry": 1209,
-      "cvc": 153,
-      "cardName": "visa",
-      "id": "2"
-    },
-    {
-      "id": "3",
-      "name": "Veronika Apostolovska",
-      "number": 5463259874521569,
-      "expiry": 162,
-      "cvc": 123,
-      "cardName": "Mastercard"
-    },
-    {
-      "id": "580c"
-    },
-    {
-      "id": "3987",
-      "name": "Sara Andreevska",
-      "number": "4564 6545 6465 4654",
+      "id": "1386",
+      "name": "Emilija Karatashevska",
+      "number": "4564 5646 5464 6546",
       "expiry": "45/64",
       "cvc": "456",
       "cardName": "visa"

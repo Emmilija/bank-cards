@@ -9,22 +9,12 @@ function App() {
 
   return (
     <CardProvider >
-     <div className=' w-full max-h-x'>
-      <div className="container mx-auto   h-full flex flex-col justify-between ">
-        {/* <header className="mb-8 h-16 px-8 flex flex-col justify-start items-start">
-     
-          <h1 className="text-primary  font-black text-30">Your Cards</h1>
-          <p className="text-gray-dark text-14">
-            Add, edit or delete your cards any time
-          </p>
-        </header> */}
-       
-        <div>
+      
+     <div className=' w-full max-h-x py-4 mx-auto h-100 min-h-screen '>
+ 
             <CardContainer  />
-        </div>
-
       </div>
-    </div>
+
     </CardProvider>
   );
 }

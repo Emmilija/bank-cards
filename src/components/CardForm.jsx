@@ -2,13 +2,14 @@ import { useState, useContext, useEffect } from "react"
 import "../styles/index.css"
 import Button from "./Button"
 import { CardContext } from "../context/CardContext"
+import CardForEdit from "./CardForEdit"
+import Success from '../assets/images/form-success.svg'
+import Error from '../assets/images/form-error.svg'
 
 
 
 
-
-export default function CardForm({ cardLogoEdit }) {
-
+export default function CardForm() {
   const [name, setName] = useState('')
   const [number, setNumber] = useState('')
   const [expiry, setExpiry] = useState('')
@@ -20,22 +21,23 @@ const [expiryError, setExpiryError] = useState('');
 const [cvcError, setCvcError] = useState('');
 const [cardName, setCardName] = useState('')
 
-  const {addCard, deleteCard, closeForm, cardEdit, updateCard} = useContext(CardContext)
+
+  const {addCard, deleteCard, closeForm, cardEdit, updateCard,} = useContext(CardContext)
   
 
 
-useEffect(() => {
+  useEffect(() => {
 
-  if(cardEdit.edit === true) {
-    setBtnDisabled(false)
-    setName(cardEdit.item.name)
-    setNumber(cardEdit.item.number)
-    setExpiry(cardEdit.item.expiry)
-    setCvc(cardEdit.item.cvc)
-    setCardName(cardEdit.item.cardName)
-  }
-},[cardEdit])
-
+    if(cardEdit.edit === true) {
+      setBtnDisabled(false)
+      setName(cardEdit.item.name)
+      setNumber(cardEdit.item.number)
+      setExpiry(cardEdit.item.expiry)
+      setCvc(cardEdit.item.cvc)
+      setCardName(cardEdit.item.cardName)
+    }
+  },[cardEdit])
+  
 
 const handleName = (e) => {
   const inputName = e.target.value;
@@ -184,9 +186,10 @@ const handleName = (e) => {
                 cardName,
             };
         
-
+        
             if (cardEdit.edit === true) {
              updateCard(cardEdit.item.id, newCard)
+          
           } else {
               addCard(newCard);
           }
@@ -203,7 +206,6 @@ const handleName = (e) => {
             // setErrorMessage("Please fill in all fields");
         }
     };
-
 
 
 
@@ -242,31 +244,7 @@ const handleName = (e) => {
 
 
 {cardEdit.edit && (
-  <div className="card-container w-full h-auto">
-    <div className="card w-60 h-auto">
-      <div className="flex ">
-        <div className="logo-container">
-          <img src={cardLogoEdit} alt="Card Logo" />
-        </div>
-        <div className="flex ">
-          <div className="">
-          <p className="edit-text font-bold ">Expiry</p>
-          <span>
-            {expiry}
-          </span>
-          </div>
-          <>
-          <p className="edit-text font-bold text-sm">CVC:</p>
-          <span>{cvc}</span>
-          </>
-        </div>
-      </div>
-      <div className="info card flex items-start">
-        <p className=" font-bold">{name}</p>
-        <p className=" font-bold">{number}</p>
-      </div>
-    </div>
-  </div>
+ <CardForEdit />
 )}
 
 <div className="h-32 space-y-6">
@@ -274,6 +252,7 @@ const handleName = (e) => {
           <label className=" text-gray-700 text-16 font-bold mb-2" htmlFor="name">
             Name in card
           </label>
+          <div className="flex flex-row">
           <input
             className="shadow appearance-none bg-transparent border-b border-gray-400 w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
             type="text"
@@ -284,6 +263,16 @@ const handleName = (e) => {
             value={name}
             onChange={handleName}
           />
+          {nameError ? (
+               <img src={Error} alt="error" />
+               ) : (
+                 <img src={Success} alt="success" />
+          )
+          }
+      
+          </div>
+       
+
           {nameError && <div className="error mt-4 ">{nameError}</div>}
         </div>
         
@@ -292,7 +281,8 @@ const handleName = (e) => {
           <label className="block text-gray-700 text-16 font-bold mb-2" htmlFor="number">
             Card number
           </label>
-          <input
+          <div className="flex flex-row"> 
+            <input
             className = "shadow appearance-none border border-red-500 rounded w-full py-1 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
             id="number"
             type="text"
@@ -302,6 +292,12 @@ const handleName = (e) => {
             value={number}
             onChange={handleNumber}
           />
+            {(numberError && number) ? (
+    <img src={Error} alt="error" />
+  ) : ((number && !numberError) && <img src={Success} alt="success" />)}
+
+          </div>
+         
  {numberError && <div className="error">{numberError}</div>}
         </div>
        
@@ -309,6 +305,7 @@ const handleName = (e) => {
           <label className="text-gray-700 text-16 font-bold mb-2" htmlFor="expiry">
             Expiry date
           </label>
+          <div className="flex flex-row"> 
           <input
             className="shadow appearance-none border border-red-500 rounded w-full py-1 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
             id="expiry"
@@ -319,6 +316,15 @@ const handleName = (e) => {
             value={expiry}
             onChange={handleExpiry}
           />
+          {expiryError ? (
+    <img src={Error} alt="error" />
+    ) : (
+      <img src={Success} alt="success" />
+          )
+
+          }
+           
+          </div>
             {expiryError && <div className="error">{expiryError}</div>}
         </div>
       
@@ -327,16 +333,27 @@ const handleName = (e) => {
           <label className="text-gray-700 text-16 font-bold mb-2" htmlFor="number">
             CVC (security code)
           </label>
+          <div className="flex flex-row">
           <input
             className="shadow appearance-none border border-red-500 w-full py-1 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
-            id="cvv"
+            id="cvc"
             maxLength="3"
             type="text"
             placeholder="000"
-            name="cvv"
+            name="cvc"
             value={cvc}
             onChange={handleCvc}
           />
+             {cvcError ? (
+                  <img src={Error} alt="error" />
+                  ) : (
+                    <img src={Success} alt="success" />
+             )
+
+             }
+          </div>
+        
+
                  {cvcError && <div className="error">{cvcError} </div>}
         </div>
  
@@ -346,9 +363,9 @@ const handleName = (e) => {
                         <Button closeForm={() => {closeForm()}} onSubmit={handleSubmit} btnDisabled={btnDisabled} className="btn mx-auto text-16"> Confirm </Button>
                     </div>
 
-                    {cardEdit.edit && (
+                    {cardEdit.edit && cardEdit.item && cardEdit.item.id && (
             <div className="delete-btn">
-              <button className="delete" onClick={deleteCard} disabled>Delete card</button>
+              <button className="delete" onClick={() => deleteCard(cardEdit.item.id)} >Delete card</button>
             </div>
           )}
 

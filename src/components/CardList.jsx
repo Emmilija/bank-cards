@@ -26,7 +26,7 @@ const isVisa = item.cardName === 'visa';
 
 
   return (
-    <div className="h-full px-8 ">
+    <div className="h-full w-full px-8 py-4 ">
      
         <div  className={`card-container ${isVisa && "two"}`} >
           <div className="card w-full h-full py-4">
@@ -39,19 +39,19 @@ const isVisa = item.cardName === 'visa';
               </div>
               <div className="flex justify-between">
                 <div className="info mr-4 flex flex-col justify-end items-end">
-                  <span className="color mr-4 small text-4">CVC</span>
+                  <span className={`mr-4 small text-4 ${isVisa ? "black" : 'color'}`}>CVC</span>
                   <p className="font-bold text-14">{item.cvc}</p>
                 </div>
                 <div className="info mr-2 flex flex-col justify-end items-end">
-                  <span className="color small">EXPIRES</span>
-                  <p className="font-bold text-14 text-white">{item.expiry}</p>
+                  <span className={`small ${isVisa ? "black" : 'color'}`}>EXPIRES</span>
+                  <p className='font-bold text-14 $ text-white'>{item.expiry}</p>
                 </div>
               </div>
             </div>
             <div className="name-container">
               <div className="name flex-col justify-between">
                 <p className="font-bold">{item.name}</p>
-                <p className={`font-bold ${isVisa ? "color-gray-dark" : "color-white"}`}>{item.number}</p>
+                <p className={`font-bold ${isVisa ? "black" : "color"}`}>{item.number}</p>
               </div>
 
            <div className="">
