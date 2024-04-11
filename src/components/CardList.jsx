@@ -4,27 +4,34 @@ import cardLogoVisa from "../assets/images/visa-logo.svg"
 import { CardContext } from "../context/CardContext"
 import { useContext } from "react"
 import EditButton from "./EditButton"
-
+import CardForm from "./CardForm"
 
 
 export default function CardList({ children, item
  }) {
 
-const {deleteCard, selectedCardForEdit} = useContext(CardContext)
+const { selectedCardForEdit} = useContext(CardContext)
 
 
 
 const isVisa = item.cardName === 'visa';
 
+<CardForm
+  nameEdit={selectedCardForEdit.name}
+  numberEdit={selectedCardForEdit.number}
+  expiryEdit={selectedCardForEdit.expiry}
+  cvcEdit={selectedCardForEdit.cvc}
+  cardLogoEdit={selectedCardForEdit.isVisa ? cardLogoVisa : cardLogoMaster}
+/>
 
 
   return (
-    <div className="h-auto">
+    <div className="h-full w-full px-8 py-4 ">
      
         <div  className={`card-container ${isVisa && "two"}`} >
-          <div className="card w-full h-full">
+          <div className="card w-full h-full py-4">
             <div className="logo-container flex justify-between items-center">
-              <div>
+              <div className="logo mr-2">
                 <img
                   src={isVisa ? cardLogoVisa : cardLogoMaster}
                   alt="Card Logo"
@@ -32,27 +39,26 @@ const isVisa = item.cardName === 'visa';
               </div>
               <div className="flex justify-between">
                 <div className="info mr-4 flex flex-col justify-end items-end">
-                  <span className="color mr-4 small text-4">CVC</span>
+                  <span className={`mr-4 small text-4 ${isVisa ? "black" : 'color'}`}>CVC</span>
                   <p className="font-bold text-14">{item.cvc}</p>
                 </div>
                 <div className="info mr-2 flex flex-col justify-end items-end">
-                  <span className="color small">EXPIRES</span>
-                  <p className="font-bold text-14 text-white">{item.expiry}</p>
+                  <span className={`small ${isVisa ? "black" : 'color'}`}>EXPIRES</span>
+                  <p className='font-bold text-14 $ text-white'>{item.expiry}</p>
                 </div>
               </div>
             </div>
             <div className="name-container">
-              <div className="flex-col justify-between">
+              <div className="name flex-col justify-between">
                 <p className="font-bold">{item.name}</p>
-                <p className="color">{item.number}</p>
+                <p className={`font-bold ${isVisa ? "black" : "color"}`}>{item.number}</p>
               </div>
-           
+
+           <div className="">
              <EditButton selectedCardForEdit={selectedCardForEdit} item={item}  />
+             </div>
 
-
-              <button onClick={deleteCard}>
-                
-              </button>
+          
     
             </div>
           </div>

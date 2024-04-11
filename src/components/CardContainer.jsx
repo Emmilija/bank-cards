@@ -7,8 +7,6 @@ import CardForm from "./CardForm"
 
 export default function CardContainer() {
     const {cardData, showForm, openForm} = useContext(CardContext)
-   
-    
 
       
 
@@ -18,27 +16,38 @@ export default function CardContainer() {
     console.log(cardData)
 
     return (
-      <>
-      <div className="" >
+    <div className={` ${showForm ? "open-form" : ''} h-full w-full `}>
+
+<header className="mb-8 mt-8 h-16 px-8 py-8 flex flex-col justify-start items-start">
+     
+     <h1 className="text-primary  font-black text-30">Your Cards</h1>
+     <p className="text-gray-dark text-14">
+       Add, edit or delete your cards any time
+     </p>
+   </header>
+
+      <div className="flex flex-col justify-between items-center h-auto" >
+
+      {showForm && (
+              <div className="absolute inset-0 w-full h-full ">
+                <CardForm cardData={{id: '', name: '', number: '', cvc: '', expiry: ''}} />
+                </div>
+            )}
 
 
-          <div className="w-full">
+{!showForm && (
+          <div className=" container-list h-auto flex flex-col w-full  ">
               {cardData.map((item) => (
                   <CardList key={item.id}  item={item} />
               ))}
           </div>
-
-          <div className="absolute inset-0 bg-black bg-opacity-75 w-full h-full ">
-    {showForm && (
-             
-                <CardForm cardData={cardData}/>
+)}
          
-            )}
 
-</div>
+
 
 {!showForm && (
-        <div className="center-btn">
+        <div className="center-btn m-4">
           <button className="btn" onClick={() => openForm()}>
             Add new card
           </button>
@@ -46,7 +55,7 @@ export default function CardContainer() {
       )}
           
       </div>
-      </>
+      </div>
   );
   
 }
